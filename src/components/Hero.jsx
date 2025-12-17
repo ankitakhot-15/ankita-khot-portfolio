@@ -333,6 +333,7 @@ import { motion } from "framer-motion";
 import { Github, Linkedin, Mail, Download } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { useToast } from "@/components/ui/use-toast";
+import ankitaPhoto from "@/assets/ankitaphoto.jpeg";
 
 const Hero = () => {
   const { toast } = useToast();
@@ -447,13 +448,23 @@ const Hero = () => {
       transition={{ duration: 0.8 }}
       className="flex justify-center lg:justify-end mt-10 lg:mt-0"
     >
-      <div className="relative w-48 sm:w-60 md:w-72 lg:w-96 h-64 sm:h-80 md:h-96 lg:h-[420px] rounded-3xl bg-white dark:bg-gray-800 p-3 shadow-2xl">
+      {/* <div className="relative w-48 sm:w-60 md:w-72 lg:w-96 h-64 sm:h-80 md:h-96 lg:h-[420px] rounded-3xl bg-white dark:bg-gray-800 p-3 shadow-2xl">
         <img
           src="https://horizons-cdn.hostinger.com/a8bf007a-ccf9-435f-80f6-cdc6db23863d/photo-4k4RD.jpg"
           alt="Ankita Khot"
           className="w-full h-full object-cover rounded-2xl"
         />
-      </div>
+      </div> */}
+
+
+<div className="relative w-48 sm:w-60 md:w-72 lg:w-96 h-64 sm:h-80 md:h-96 lg:h-[420px] rounded-3xl bg-white dark:bg-gray-800 p-3 shadow-2xl">
+  <img
+    src={ankitaPhoto}
+    alt="Ankita Khot"
+    className="w-full h-full object-cover rounded-2xl"
+  />
+</div>
+
     </motion.div>
   </div>
 </section>

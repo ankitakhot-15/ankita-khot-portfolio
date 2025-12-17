@@ -1,6 +1,8 @@
 import React from 'react';
 import { motion } from 'framer-motion';
 import { Briefcase, MapPin, Calendar } from 'lucide-react';
+import photo from "@/assets/photo.jpeg";
+
 const Experience = () => {
   const responsibilities = ['Developed and maintained cross-platform mobile applications using Flutter', 'Implemented responsive web applications with Flutter Web framework', 'Integrated Firebase services for authentication, database, and cloud storage', 'Utilized Cloudinary for efficient image and media management', 'Collaborated with design team to create intuitive user interfaces', 'Participated in code reviews and maintained version control using GitHub', 'Debugged and optimized application performance across different devices', 'Implemented state management solutions using Provider and GetX patterns' // Changed Bloc to GetX
   ];
@@ -101,8 +103,14 @@ const Experience = () => {
       }} transition={{
         duration: 0.6,
         delay: 0.2
-      }} className="mt-8 lg:mt-12 text-center">
-          <img className="w-full max-w-4xl mx-auto rounded-2xl shadow-2xl shadow-blue-500/20" alt="Team collaboration at Asecnsify Technology" src="https://horizons-cdn.hostinger.com/a8bf007a-ccf9-435f-80f6-cdc6db23863d/2d7ccf2c-3b54-4e7a-9c4a-f784446ea191-mzrq0.jpg" />
+      }}
+       className="mt-8 lg:mt-12 text-center">
+        <img
+  className="w-full max-w-4xl mx-auto rounded-2xl shadow-2xl shadow-blue-500/20"
+  src={photo}
+  alt="Ankita Khot"
+ />
+          {/* <img className="w-full max-w-4xl mx-auto rounded-2xl shadow-2xl shadow-blue-500/20" alt="Team collaboration at Asecnsify Technology" src="https://horizons-cdn.hostinger.com/a8bf007a-ccf9-435f-80f6-cdc6db23863d/2d7ccf2c-3b54-4e7a-9c4a-f784446ea191-mzrq0.jpg" /> */}
         </motion.div>
       </div>
     </section>;
