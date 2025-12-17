@@ -327,7 +327,6 @@
 
 
 //========================================
-
 import React from "react";
 import { motion } from "framer-motion";
 import { Github, Linkedin, Mail, Download } from "lucide-react";
@@ -335,221 +334,132 @@ import { Button } from "@/components/ui/button";
 import { useToast } from "@/components/ui/use-toast";
 import ankitaPhoto from "@/assets/ankitaphoto.jpeg";
 
+// IMPORTANT: GitHub Pages safe resume path
+const RESUME_PATH = `${import.meta.env.BASE_URL}resume/Ankita_Khot_Resume.pdf`;
+
 const Hero = () => {
   const { toast } = useToast();
 
   // Navigation handlers
-  const handleGitHub = () => window.open("https://github.com/ankitakhot-15", "_blank");
+  const handleGitHub = () =>
+    window.open("https://github.com/ankitakhot-15", "_blank");
+
   const handleLinkedIn = () =>
     window.open("https://www.linkedin.com/in/ankita-khot-5533312bb", "_blank");
 
   const handleContact = () => {
     const section = document.getElementById("contact");
-    if(section) section.scrollIntoView({ behavior: "smooth" });
+    if (section) section.scrollIntoView({ behavior: "smooth" });
   };
 
   const handleDownloadResume = async () => {
     try {
-      const res = await fetch("/resume/Ankita_Khot_Resume.pdf");
-      if (!res.ok) throw new Error("File missing");
+      const response = await fetch(RESUME_PATH, { method: "HEAD" });
+      if (!response.ok) throw new Error("Resume not found");
 
-      const blob = await res.blob();
-      const url = URL.createObjectURL(blob);
-
-      const a = document.createElement("a");
-      a.href = url;
-      a.download = "Ankita_Khot_Resume.pdf";
-      a.click();
-
-      URL.revokeObjectURL(url);
+      window.open(RESUME_PATH, "_blank");
 
       toast({
-        title: "📄 Resume Downloaded",
-        description: "Your resume PDF has been downloaded successfully.",
+        title: "📄 Resume Opened",
+        description: "Your resume has been opened successfully.",
       });
     } catch {
       toast({
-        title: "❌ Download Failed",
-        description: "Please add resume inside public/resume folder.",
+        title: "❌ Resume Not Found",
+        description:
+          "Please ensure the resume file is placed in the public/resume folder.",
       });
     }
   };
 
   return (
     <section
-  id="hero"
-  className="min-h-screen flex items-center px-4 sm:px-6 md:px-16 lg:px-24 pt-20 md:pt-24 lg:pt-28
-             bg-gradient-to-r from-white via-gray-100 to-white dark:from-black dark:via-slate-900 dark:to-black transition-colors"
->
-  <div className="container mx-auto grid grid-cols-1 lg:grid-cols-2 gap-12 items-center">
-    
-    {/* LEFT CONTENT */}
-    <motion.div
-      initial={{ opacity: 0, x: -40 }}
-      animate={{ opacity: 1, x: 0 }}
-      transition={{ duration: 0.8 }}
-      className="text-center lg:text-left"
+      id="hero"
+      className="min-h-screen flex items-center px-4 sm:px-6 md:px-16 lg:px-24 pt-20 md:pt-24 lg:pt-28
+      bg-gradient-to-r from-white via-gray-100 to-white dark:from-black dark:via-slate-900 dark:to-black transition-colors"
     >
-      <h1 className="text-2xl xs:text-3xl sm:text-4xl md:text-5xl lg:text-5xl xl:text-6xl font-bold mb-4 text-gray-900 dark:text-slate-200">
-        Hey, I'm <span className="text-orange-400">Ankita Khot</span>
-      </h1>
+      <div className="container mx-auto grid grid-cols-1 lg:grid-cols-2 gap-12 items-center">
 
-      <h2 className="text-base sm:text-lg md:text-xl lg:text-2xl uppercase tracking-wide text-gray-700 dark:text-slate-400 mb-6">
-        Flutter Developer
-      </h2>
-
-      <div className="w-16 sm:w-20 md:w-24 h-[2px] bg-orange-400 mb-6 mx-auto lg:mx-0" />
-
-      <p className="text-gray-700 dark:text-slate-300 max-w-xs sm:max-w-sm md:max-w-md mb-4 leading-relaxed mx-auto lg:mx-0">
-        I specialize in building high-performance, visually appealing mobile and web applications using <b>Flutter</b>. I enjoy turning complex problems into clean, scalable solutions.
-      </p>
-
-      <p className="text-gray-700 dark:text-slate-300 max-w-xs sm:max-w-sm md:max-w-md mb-6 leading-relaxed mx-auto lg:mx-0">
-        Passionate about clean architecture, smooth UI animations, responsive layouts, and delivering seamless user experiences.
-      </p>
-
-      {/* BUTTONS */}
-      <div className="flex flex-col sm:flex-row justify-center lg:justify-start gap-4 mt-6">
-        <Button
-          onClick={handleDownloadResume}
-          className="bg-orange-500 hover:bg-orange-600 text-white px-6 py-3 rounded-full text-base sm:text-lg flex items-center justify-center"
+        {/* LEFT CONTENT */}
+        <motion.div
+          initial={{ opacity: 0, x: -40 }}
+          animate={{ opacity: 1, x: 0 }}
+          transition={{ duration: 0.8 }}
+          className="text-center lg:text-left"
         >
-          <Download className="mr-2" /> Resume
-        </Button>
+          <h1 className="text-2xl xs:text-3xl sm:text-4xl md:text-5xl xl:text-6xl font-bold mb-4 text-gray-900 dark:text-slate-200">
+            Hey, I'm <span className="text-orange-400">Ankita Khot</span>
+          </h1>
 
-        <Button
-          onClick={handleGitHub}
-          variant="outline"
-          className="px-6 py-3 rounded-full text-base sm:text-lg border-slate-400 flex items-center justify-center"
-        >
-          <Github className="mr-2" /> GitHub
-        </Button>
+          <h2 className="text-base sm:text-lg md:text-xl uppercase tracking-wide text-gray-700 dark:text-slate-400 mb-6">
+            Flutter Developer
+          </h2>
 
-        <Button
-          onClick={handleLinkedIn}
-          className="bg-blue-600 hover:bg-blue-700 text-white px-6 py-3 rounded-full text-base sm:text-lg flex items-center justify-center"
-        >
-          <Linkedin className="mr-2" /> LinkedIn
-        </Button>
+          <div className="w-20 h-[2px] bg-orange-400 mb-6 mx-auto lg:mx-0" />
 
-        <Button
-          onClick={handleContact}
-          className="bg-cyan-600 hover:bg-cyan-700 text-white px-6 py-3 rounded-full text-base sm:text-lg flex items-center justify-center"
+          <p className="text-gray-700 dark:text-slate-300 max-w-md mb-4 leading-relaxed mx-auto lg:mx-0">
+            I specialize in building high-performance, visually appealing mobile
+            and web applications using <b>Flutter</b>.
+          </p>
+
+          <p className="text-gray-700 dark:text-slate-300 max-w-md mb-6 leading-relaxed mx-auto lg:mx-0">
+            Passionate about clean architecture, smooth UI animations,
+            responsive layouts, and seamless user experiences.
+          </p>
+
+          {/* BUTTONS */}
+          <div className="flex flex-col sm:flex-row justify-center lg:justify-start gap-4 mt-6">
+            <Button
+              onClick={handleDownloadResume}
+              className="bg-orange-500 hover:bg-orange-600 text-white px-6 py-3 rounded-full flex items-center"
+            >
+              <Download className="mr-2" /> Resume
+            </Button>
+
+            <Button
+              onClick={handleGitHub}
+              variant="outline"
+              className="px-6 py-3 rounded-full flex items-center"
+            >
+              <Github className="mr-2" /> GitHub
+            </Button>
+
+            <Button
+              onClick={handleLinkedIn}
+              className="bg-blue-600 hover:bg-blue-700 text-white px-6 py-3 rounded-full flex items-center"
+            >
+              <Linkedin className="mr-2" /> LinkedIn
+            </Button>
+
+            <Button
+              onClick={handleContact}
+              className="bg-cyan-600 hover:bg-cyan-700 text-white px-6 py-3 rounded-full flex items-center"
+            >
+              <Mail className="mr-2" /> Contact
+            </Button>
+          </div>
+        </motion.div>
+
+        {/* RIGHT IMAGE */}
+        <motion.div
+          initial={{ opacity: 0, x: 40 }}
+          animate={{ opacity: 1, x: 0 }}
+          transition={{ duration: 0.8 }}
+          className="flex justify-center lg:justify-end mt-10 lg:mt-0"
         >
-          <Mail className="mr-2" /> Contact
-        </Button>
+          <div className="relative w-48 sm:w-60 md:w-72 lg:w-96 h-64 sm:h-80 md:h-96 lg:h-[420px]
+            rounded-3xl bg-white dark:bg-gray-800 p-3 shadow-2xl"
+          >
+            <img
+              src={ankitaPhoto}
+              alt="Ankita Khot"
+              className="w-full h-full object-cover rounded-2xl"
+            />
+          </div>
+        </motion.div>
+
       </div>
-    </motion.div>
-
-    {/* RIGHT IMAGE */}
-    <motion.div
-      initial={{ opacity: 0, x: 40 }}
-      animate={{ opacity: 1, x: 0 }}
-      transition={{ duration: 0.8 }}
-      className="flex justify-center lg:justify-end mt-10 lg:mt-0"
-    >
-      {/* <div className="relative w-48 sm:w-60 md:w-72 lg:w-96 h-64 sm:h-80 md:h-96 lg:h-[420px] rounded-3xl bg-white dark:bg-gray-800 p-3 shadow-2xl">
-        <img
-          src="https://horizons-cdn.hostinger.com/a8bf007a-ccf9-435f-80f6-cdc6db23863d/photo-4k4RD.jpg"
-          alt="Ankita Khot"
-          className="w-full h-full object-cover rounded-2xl"
-        />
-      </div> */}
-
-
-<div className="relative w-48 sm:w-60 md:w-72 lg:w-96 h-64 sm:h-80 md:h-96 lg:h-[420px] rounded-3xl bg-white dark:bg-gray-800 p-3 shadow-2xl">
-  <img
-    src={ankitaPhoto}
-    alt="Ankita Khot"
-    className="w-full h-full object-cover rounded-2xl"
-  />
-</div>
-
-    </motion.div>
-  </div>
-</section>
-
-    // <section
-    //   id="hero"
-    //   className="min-h-screen flex items-center bg-gradient-to-r from-black via-slate-900 to-black px-4 sm:px-6 md:px-16 lg:px-24 pt-20 md:pt-24 lg:pt-28"
-    // >
-    //   <div className="container mx-auto grid grid-cols-1 lg:grid-cols-2 gap-12 items-center">
-        
-    //     {/* LEFT CONTENT */}
-    //     <motion.div
-    //       initial={{ opacity: 0, x: -40 }}
-    //       animate={{ opacity: 1, x: 0 }}
-    //       transition={{ duration: 0.8 }}
-    //       className="text-center lg:text-left"
-    //     >
-    //       <h1 className="text-2xl xs:text-3xl sm:text-4xl md:text-5xl lg:text-5xl xl:text-6xl font-bold mb-4">
-    //         Hey, I'm <span className="text-orange-400">Ankita Khot</span>
-    //       </h1>
-
-    //       <h2 className="text-base sm:text-lg md:text-xl lg:text-2xl uppercase tracking-wide text-slate-200 mb-6">
-    //         Flutter Developer
-    //       </h2>
-
-    //       <div className="w-16 sm:w-20 md:w-24 h-[2px] bg-orange-400 mb-6 mx-auto lg:mx-0" />
-
-    //       <p className="text-slate-300 max-w-xs sm:max-w-sm md:max-w-md mb-4 leading-relaxed mx-auto lg:mx-0">
-    //         I specialize in building high-performance, visually appealing mobile and web applications using <b>Flutter</b>. I enjoy turning complex problems into clean, scalable solutions.
-    //       </p>
-
-    //       <p className="text-slate-300 max-w-xs sm:max-w-sm md:max-w-md mb-6 leading-relaxed mx-auto lg:mx-0">
-    //         Passionate about clean architecture, smooth UI animations, responsive layouts, and delivering seamless user experiences.
-    //       </p>
-
-    //       {/* BUTTONS */}
-    //       <div className="flex flex-col sm:flex-row justify-center lg:justify-start gap-4 mt-6">
-    //         <Button
-    //           onClick={handleDownloadResume}
-    //           className="bg-orange-500 hover:bg-orange-600 text-white px-6 py-3 rounded-full text-base sm:text-lg flex items-center justify-center"
-    //         >
-    //           <Download className="mr-2" /> Resume
-    //         </Button>
-
-    //         <Button
-    //           onClick={handleGitHub}
-    //           variant="outline"
-    //           className="px-6 py-3 rounded-full text-base sm:text-lg border-slate-400 flex items-center justify-center"
-    //         >
-    //           <Github className="mr-2" /> GitHub
-    //         </Button>
-
-    //         <Button
-    //           onClick={handleLinkedIn}
-    //           className="bg-blue-600 hover:bg-blue-700 text-white px-6 py-3 rounded-full text-base sm:text-lg flex items-center justify-center"
-    //         >
-    //           <Linkedin className="mr-2" /> LinkedIn
-    //         </Button>
-
-    //         <Button
-    //           onClick={handleContact}
-    //           className="bg-cyan-600 hover:bg-cyan-700 text-white px-6 py-3 rounded-full text-base sm:text-lg flex items-center justify-center"
-    //         >
-    //           <Mail className="mr-2" /> Contact
-    //         </Button>
-    //       </div>
-    //     </motion.div>
-
-    //     {/* RIGHT IMAGE */}
-    //     <motion.div
-    //       initial={{ opacity: 0, x: 40 }}
-    //       animate={{ opacity: 1, x: 0 }}
-    //       transition={{ duration: 0.8 }}
-    //       className="flex justify-center lg:justify-end mt-10 lg:mt-0"
-    //     >
-    //       <div className="relative w-48 sm:w-60 md:w-72 lg:w-96 h-64 sm:h-80 md:h-96 lg:h-[420px] rounded-3xl bg-white p-3 shadow-2xl">
-    //         <img
-    //           src="https://horizons-cdn.hostinger.com/a8bf007a-ccf9-435f-80f6-cdc6db23863d/photo-4k4RD.jpg"
-    //           alt="Ankita Khot"
-    //           className="w-full h-full object-cover rounded-2xl"
-    //         />
-    //       </div>
-    //     </motion.div>
-    //   </div>
-    // </section>
+    </section>
   );
 };
 
