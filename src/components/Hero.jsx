@@ -327,6 +327,8 @@
 
 
 //========================================
+
+
 import React from "react";
 import { motion } from "framer-motion";
 import { Github, Linkedin, Mail, Download } from "lucide-react";
@@ -352,25 +354,43 @@ const Hero = () => {
     if (section) section.scrollIntoView({ behavior: "smooth" });
   };
 
-  const handleDownloadResume = async () => {
-    try {
-      const response = await fetch(RESUME_PATH, { method: "HEAD" });
-      if (!response.ok) throw new Error("Resume not found");
+  // const handleDownloadResume = async () => {
+  //   try {
+  //     const response = await fetch(RESUME_PATH, { method: "HEAD" });
+  //     if (!response.ok) throw new Error("Resume not found");
 
-      window.open(RESUME_PATH, "_blank");
+  //     window.open(RESUME_PATH, "_blank");
 
-      toast({
-        title: "📄 Resume Opened",
-        description: "Your resume has been opened successfully.",
-      });
-    } catch {
-      toast({
-        title: "❌ Resume Not Found",
-        description:
-          "Please ensure the resume file is placed in the public/resume folder.",
-      });
-    }
-  };
+  //     toast({
+  //       title: "📄 Resume Opened",
+  //       description: "Your resume has been opened successfully.",
+  //     });
+  //   } catch {
+  //     toast({
+  //       title: "❌ Resume Not Found",
+  //       description:
+  //         "Please ensure the resume file is placed in the public/resume folder.",
+  //     });
+  //   }
+  // };
+
+const handleDownloadResume = () => {
+  const link = document.createElement("a");
+  link.href = RESUME_PATH;
+  link.download = "Ankita_Khot_Resume.pdf";
+  link.target = "_blank";
+
+  document.body.appendChild(link);
+  link.click();
+  document.body.removeChild(link);
+
+  toast({
+    title: "📄 Resume Downloaded",
+    description: "Your resume has been downloaded successfully.",
+  });
+};
+
+
 
   return (
     <section

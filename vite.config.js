@@ -12,7 +12,7 @@ import path from "path";
 // https://vitejs.dev/config/
 export default defineConfig({
   plugins: [react()],
-  base:"/ankita-portfolio",
+  base: "/ankita-khot-portfolio",
   // base: process.env.VITE_BASE_PATH || "/ankita-portfolio",
   resolve: {
     alias: {

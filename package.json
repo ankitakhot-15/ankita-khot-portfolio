@@ -1,6 +1,6 @@
 {
 	"name": "ankita-khot-portfolio",
-	"homepage": "https://github.com/ankitakhot-15/ankita-portfolio/",
+	"homepage": "https://github.com/ankitakhot-15/ankita-khot-portfolio/",
 	"type": "module",
 	"version": "0.0.0",
 	"private": true,
@@ -12,7 +12,7 @@
 		"build": "vite build",
 		"preview": "vite preview --host --port 3000",
 		"predeploy": "npm run build",
-		"deploy":"gh-pages -d dist"
+		"deploy": "gh-pages -d dist"
 	},
 	"dependencies": {
 		"@radix-ui/react-alert-dialog": "^1.1.4",
